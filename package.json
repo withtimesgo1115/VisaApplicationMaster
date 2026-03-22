@@ -1,0 +1,14 @@
+{
+  "name": "visa-application-master",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "test:e2e": "pnpm --filter @visa/api test:e2e"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0"
+  }
+}
