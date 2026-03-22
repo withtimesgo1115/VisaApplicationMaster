@@ -1,4 +1,9 @@
-import { Controller, Get, Header } from '@nestjs/common';
+import { Controller, Get, Header, Param } from '@nestjs/common';
+import {
+  getChecklistCss,
+  getChecklistHtml,
+  getChecklistJs
+} from './ops-dashboard/checklist-page';
 import {
   getOpsDashboardCss,
   getOpsDashboardHtml,
@@ -24,6 +29,12 @@ export class AppController {
     return getOpsDashboardHtml();
   }
 
+  @Get('visa/:countryId')
+  @Header('Content-Type', 'text/html; charset=utf-8')
+  visaChecklist(@Param('countryId') _countryId: string) {
+    return getChecklistHtml();
+  }
+
   @Get('app/styles.css')
   @Header('Content-Type', 'text/css; charset=utf-8')
   opsStyles() {
@@ -34,5 +45,17 @@ export class AppController {
   @Header('Content-Type', 'application/javascript; charset=utf-8')
   opsScript() {
     return getOpsDashboardJs();
+  }
+
+  @Get('app/checklist.css')
+  @Header('Content-Type', 'text/css; charset=utf-8')
+  checklistStyles() {
+    return getChecklistCss();
+  }
+
+  @Get('app/checklist.js')
+  @Header('Content-Type', 'application/javascript; charset=utf-8')
+  checklistScript() {
+    return getChecklistJs();
   }
 }

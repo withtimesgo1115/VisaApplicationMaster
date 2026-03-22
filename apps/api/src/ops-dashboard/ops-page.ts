@@ -347,6 +347,16 @@ a {
   font-size: 24px;
 }
 
+.enter-link {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #163d67;
+  font-size: 14px;
+  text-decoration: none;
+}
+
 .detail-shell {
   position: relative;
   overflow: hidden;
@@ -565,6 +575,7 @@ function renderCountryCards(activeId) {
         <div class="country-main">
           <div class="country-name">\${country.countryName}</div>
           <div class="country-visa">\${country.visaName}</div>
+          <a class="enter-link" href="/visa/\${country.id}">进入材料清单页 →</a>
         </div>
         <div class="country-arrow">→</div>
       </button>
@@ -617,6 +628,15 @@ function renderCountryDetail(countryId) {
       <section class="detail-card">
         <h3>推荐操作顺序</h3>
         \${renderList(country.steps)}
+      </section>
+
+      <section class="detail-card full">
+        <h3>下一步</h3>
+        <p class="panel-lead">如果你已经决定申请这个国家的旅游签证，就进入材料清单页，把当前手头已有材料逐项勾选，再用系统检查缺失项。</p>
+        <a class="source-link" href="/visa/\${country.id}">
+          <span>进入用户流程</span>
+          <strong>打开 \${country.countryName} 材料清单页</strong>
+        </a>
       </section>
 
       <section class="detail-card full">
