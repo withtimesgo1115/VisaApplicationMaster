@@ -7,6 +7,12 @@ import {
 
 @Controller()
 export class AppController {
+  @Get()
+  @Header('Content-Type', 'text/html; charset=utf-8')
+  home() {
+    return getOpsDashboardHtml();
+  }
+
   @Get('health')
   health() {
     return { status: 'ok' };
@@ -18,13 +24,13 @@ export class AppController {
     return getOpsDashboardHtml();
   }
 
-  @Get('ops/styles.css')
+  @Get('app/styles.css')
   @Header('Content-Type', 'text/css; charset=utf-8')
   opsStyles() {
     return getOpsDashboardCss();
   }
 
-  @Get('ops/app.js')
+  @Get('app/app.js')
   @Header('Content-Type', 'application/javascript; charset=utf-8')
   opsScript() {
     return getOpsDashboardJs();

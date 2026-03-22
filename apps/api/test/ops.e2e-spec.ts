@@ -19,12 +19,16 @@ describe('Ops Dashboard', () => {
     await app.close();
   });
 
-  it('GET /ops renders the operator dashboard page', async () => {
-    const res = await request(app.getHttpServer()).get('/ops');
+  it('GET / renders the Chinese destination selection page', async () => {
+    const res = await request(app.getHttpServer()).get('/');
+    const scriptRes = await request(app.getHttpServer()).get('/app/app.js');
 
     expect(res.status).toBe(200);
-    expect(res.text).toContain('Visa Ops Console');
-    expect(res.text).toContain('Check Completeness');
-    expect(res.text).toContain('Result Console');
+    expect(res.text).toContain('先选国家，再看真正该准备什么');
+    expect(res.text).toContain('选择目的地');
+    expect(res.text).toContain('/app/app.js');
+    expect(scriptRes.status).toBe(200);
+    expect(scriptRes.text).toContain('日本');
+    expect(scriptRes.text).toContain('France-Visas');
   });
 });
