@@ -8,7 +8,7 @@ export interface RuleRecord extends CreateRuleDto {
 
 @Injectable()
 export class RulesService {
-  private readonly rules: RuleRecord[] = [];
+  private static readonly rules: RuleRecord[] = [];
 
   create(dto: CreateRuleDto): RuleRecord {
     const record: RuleRecord = {
@@ -16,11 +16,23 @@ export class RulesService {
       createdAt: new Date().toISOString(),
       ...dto
     };
-    this.rules.push(record);
+    RulesService.rules.push(record);
     return record;
   }
 
   list(): RuleRecord[] {
-    return this.rules;
+    return RulesService.rules;
+  }
+
+  findLatestForSelection(
+    destinationCode: string,
+    visaType: string
+  ): RuleRecord | undefined {
+    return RulesService.rules
+      .filter(
+        (rule) =>
+          rule.destinationCode === destinationCode && rule.visaType === visaType
+      )
+      .at(-1);
   }
 }

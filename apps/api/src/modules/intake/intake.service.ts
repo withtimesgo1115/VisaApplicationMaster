@@ -16,13 +16,10 @@ export class IntakeService {
   constructor(private readonly rulesService: RulesService) {}
 
   create(dto: CreateCaseDto): CaseRecord {
-    const latestRule = this.rulesService
-      .list()
-      .filter(
-        (rule) =>
-          rule.destinationCode === dto.destinationCode && rule.visaType === dto.visaType
-      )
-      .at(-1);
+    const latestRule = this.rulesService.findLatestForSelection(
+      dto.destinationCode,
+      dto.visaType
+    );
 
     const record: CaseRecord = {
       id: crypto.randomUUID(),
