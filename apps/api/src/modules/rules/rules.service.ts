@@ -23,4 +23,16 @@ export class RulesService {
   list(): RuleRecord[] {
     return this.rules;
   }
+
+  findLatestForSelection(
+    destinationCode: string,
+    visaType: string
+  ): RuleRecord | undefined {
+    return this.rules
+      .filter(
+        (rule) =>
+          rule.destinationCode === destinationCode && rule.visaType === visaType
+      )
+      .at(-1);
+  }
 }
